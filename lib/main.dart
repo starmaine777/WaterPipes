@@ -98,13 +98,35 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            PipePanel( true, false, false, false),
-            SizedBox(height: 10,),
-            PipePanel( false, true, false, false),
-            SizedBox(height: 10,),
-            PipePanel( false, false, true, true),
-            SizedBox(height: 10,),
-            PipePanel( true, true, true, true),
+            PipePanel(
+                isLeftOpen: true,
+                isTopOpen: false,
+                isBottomOpen: false,
+                isRightOpen: false),
+            SizedBox(
+              height: 10,
+            ),
+            PipePanel(
+                isLeftOpen: false,
+                isTopOpen: true,
+                isBottomOpen: false,
+                isRightOpen: false),
+            SizedBox(
+              height: 10,
+            ),
+            PipePanel(
+                isLeftOpen: false,
+                isTopOpen: false,
+                isBottomOpen: true,
+                isRightOpen: true),
+            SizedBox(
+              height: 10,
+            ),
+            PipePanel(
+                isLeftOpen: true,
+                isTopOpen: true,
+                isBottomOpen: true,
+                isRightOpen: true)
           ],
         ),
       ),

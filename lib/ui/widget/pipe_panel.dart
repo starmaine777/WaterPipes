@@ -12,72 +12,86 @@ class PipePanel extends StatefulWidget {
   final ValueNotifier<Rotation> rotation = ValueNotifier(Rotation.NONE);
 
   PipePanel(
-      this.isLeftOpen, this.isTopOpen, this.isBottomOpen, this.isRightOpen);
+      {@required this.isLeftOpen,
+      @required this.isTopOpen,
+      @required this.isBottomOpen,
+      @required this.isRightOpen});
 
   @override
   State<PipePanel> createState() => _PipePanelState();
+
+  void setFill(bool isFilled) {
+    isFillChanger.value = isFilled;
+  }
 }
 
 class _PipePanelState extends State<PipePanel> {
-  Color get pipeColor => Colors.blue.shade300;
 
   @override
   Widget build(BuildContext context) {
-    return RotatedBox(
-      quarterTurns: widget.rotation.value.quarterTurns,
-      child: Container(
-        width: 50,
-        height: 50,
-        color: Colors.grey.shade300,
-        child: Stack(
-          children: [
-            Opacity(
-              opacity: widget.isTopOpen ? 1.0 : 0.0,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: 10,
-                  height: 30,
-                  color: pipeColor,
-                ),
+    return ValueListenableBuilder(
+      valueListenable: widget.isFillChanger,
+      builder: (context, isFilled, _) {
+        Color pipeColor =
+            isFilled ? Colors.blue.shade500 : Colors.grey.shade500;
+        return GestureDetector(
+            onTap: () {
+              widget.isFillChanger.value = !widget.isFillChanger.value;
+            },
+            child: Container(
+              width: 50,
+              height: 50,
+              color: Colors.grey.shade300,
+              child: Stack(
+                children: [
+                  Opacity(
+                    opacity: widget.isTopOpen ? 1.0 : 0.0,
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        width: 10,
+                        height: 30,
+                        color: pipeColor,
+                      ),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: widget.isLeftOpen ? 1.0 : 0.0,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        width: 30,
+                        height: 10,
+                        color: pipeColor,
+                      ),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: widget.isRightOpen ? 1.0 : 0.0,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        width: 30,
+                        height: 10,
+                        color: pipeColor,
+                      ),
+                    ),
+                  ),
+                  Opacity(
+                    opacity: widget.isBottomOpen ? 1.0 : 0.0,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        width: 10,
+                        height: 30,
+                        color: pipeColor,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Opacity(
-              opacity: widget.isLeftOpen ? 1.0 : 0.0,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  width: 30,
-                  height: 10,
-                  color: pipeColor,
-                ),
-              ),
-            ),
-            Opacity(
-              opacity: widget.isRightOpen ? 1.0 : 0.0,
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  width: 30,
-                  height: 10,
-                  color: pipeColor,
-                ),
-              ),
-            ),
-            Opacity(
-              opacity: widget.isBottomOpen ? 1.0 : 0.0,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  width: 10,
-                  height: 30,
-                  color: pipeColor,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+            ));
+      },
     );
   }
 }
