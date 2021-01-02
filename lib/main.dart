@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:water_pipes/ui/widget/pipe_panel.dart';
 
 void main() {
   runApp(MyApp());
@@ -97,13 +98,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            PipePanel( true, false, false, false),
+            SizedBox(height: 10,),
+            PipePanel( false, true, false, false),
+            SizedBox(height: 10,),
+            PipePanel( false, false, true, true),
+            SizedBox(height: 10,),
+            PipePanel( true, true, true, true),
           ],
         ),
       ),
