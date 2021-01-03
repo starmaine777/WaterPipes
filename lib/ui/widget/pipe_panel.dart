@@ -8,7 +8,7 @@ class PipePanel extends StatelessWidget {
   final bool isRightOpen;
   final bool isBottomOpen;
 
-  final ValueNotifier<bool> isFillChanger = ValueNotifier(false);
+  final ValueNotifier<bool> isFillNotifier = ValueNotifier(false);
   final ValueNotifier<Rotation> rotation = ValueNotifier(Rotation.NONE);
 
   PipePanel(
@@ -20,7 +20,7 @@ class PipePanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: isFillChanger,
+      valueListenable: isFillNotifier,
       builder: (context, isFilled, _) {
         Color pipeColor =
             isFilled ? Colors.blue.shade500 : Colors.grey.shade500;
@@ -82,11 +82,11 @@ class PipePanel extends StatelessWidget {
   }
 
   void changeFill() {
-    isFillChanger.value = !isFillChanger.value;
+    isFillNotifier.value = !isFillNotifier.value;
   }
 
   void setFill(bool isFilled) {
-    isFillChanger.value = isFilled;
+    isFillNotifier.value = isFilled;
   }
 
 }
