@@ -24,33 +24,29 @@ class PipePanel extends StatelessWidget {
       builder: (context, isFilled, _) {
         Color pipeColor =
             isFilled ? Colors.blue.shade500 : Colors.grey.shade500;
-        return GestureDetector(
-            onTap: () {
-              isFillChanger.value = !isFillChanger.value;
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              color: Colors.grey.shade300,
-              child: Stack(
-                children: [
-                  Opacity(
-                    opacity: isTopOpen ? 1.0 : 0.0,
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        width: 10,
-                        height: 30,
-                        color: pipeColor,
-                      ),
-                    ),
+        return Container(
+          width: 50,
+          height: 50,
+          color: Colors.grey.shade300,
+          child: Stack(
+            children: [
+              Opacity(
+                opacity: isTopOpen ? 1.0 : 0.0,
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: 10,
+                    height: 30,
+                    color: pipeColor,
                   ),
-                  Opacity(
-                    opacity: isLeftOpen ? 1.0 : 0.0,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Container(
-                        width: 30,
+                ),
+              ),
+              Opacity(
+                opacity: isLeftOpen ? 1.0 : 0.0,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    width: 30,
                         height: 10,
                         color: pipeColor,
                       ),
@@ -60,29 +56,33 @@ class PipePanel extends StatelessWidget {
                     opacity: isRightOpen ? 1.0 : 0.0,
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: Container(
-                        width: 30,
-                        height: 10,
-                        color: pipeColor,
-                      ),
-                    ),
+                  child: Container(
+                    width: 30,
+                    height: 10,
+                    color: pipeColor,
                   ),
-                  Opacity(
-                    opacity: isBottomOpen ? 1.0 : 0.0,
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        width: 10,
-                        height: 30,
-                        color: pipeColor,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ));
+              Opacity(
+                opacity: isBottomOpen ? 1.0 : 0.0,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: 10,
+                    height: 30,
+                    color: pipeColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
+  }
+
+  void changeFill() {
+    isFillChanger.value = !isFillChanger.value;
   }
 
   void setFill(bool isFilled) {

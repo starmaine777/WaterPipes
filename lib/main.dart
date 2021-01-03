@@ -98,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            PipePanel(
+            createPanel(
                 isLeftOpen: true,
                 isTopOpen: false,
                 isBottomOpen: false,
@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 10,
             ),
-            PipePanel(
+            createPanel(
                 isLeftOpen: false,
                 isTopOpen: true,
                 isBottomOpen: false,
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 10,
             ),
-            PipePanel(
+            createPanel(
                 isLeftOpen: false,
                 isTopOpen: false,
                 isBottomOpen: true,
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 10,
             ),
-            PipePanel(
+            createPanel(
                 isLeftOpen: true,
                 isTopOpen: true,
                 isBottomOpen: true,
@@ -136,5 +136,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  Widget createPanel(
+      {bool isLeftOpen, bool isTopOpen, bool isBottomOpen, bool isRightOpen}) {
+    final panel = PipePanel(
+        isLeftOpen: isLeftOpen,
+        isTopOpen: isTopOpen,
+        isBottomOpen: isBottomOpen,
+        isRightOpen: isRightOpen);
+    return GestureDetector(onTap: () => {panel.changeFill()}, child: panel);
   }
 }
