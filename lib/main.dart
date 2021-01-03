@@ -146,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child : Consumer<PipePanelModel>(
         builder: (_, model, child) => GestureDetector(
           onTap: () {
-            model.changeFill();
+            model.changeRotation();
           },
           child: PipePanel(
               isLeftOpen: isLeftOpen,

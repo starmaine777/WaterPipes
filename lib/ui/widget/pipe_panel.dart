@@ -21,18 +21,20 @@ class PipePanel extends StatelessWidget {
       builder: (context, model, child) {
         Color pipeColor =
             model._isFilled ? Colors.blue.shade500 : Colors.grey.shade500;
-        return Container(
-          width: 50,
-          height: 50,
-          color: Colors.grey.shade300,
-          child: Stack(
-            children: [
-              Opacity(
-                opacity: isTopOpen ? 1.0 : 0.0,
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    width: 10,
+        return RotatedBox(
+            quarterTurns: model._rotationIndex,
+            child: Container(
+              width: 50,
+              height: 50,
+              color: Colors.grey.shade300,
+              child: Stack(
+                children: [
+                  Opacity(
+                    opacity: isTopOpen ? 1.0 : 0.0,
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        width: 10,
                     height: 30,
                     color: pipeColor,
                   ),
@@ -63,17 +65,17 @@ class PipePanel extends StatelessWidget {
               Opacity(
                 opacity: isBottomOpen ? 1.0 : 0.0,
                 child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: 10,
-                    height: 30,
-                    color: pipeColor,
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        width: 10,
+                        height: 30,
+                        color: pipeColor,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        );
+            ));
       },
     );
   }
@@ -82,8 +84,19 @@ class PipePanel extends StatelessWidget {
 class PipePanelModel extends ChangeNotifier {
   bool _isFilled = false;
 
+  int _rotationIndex = 0;
+
   void changeFill() {
     _isFilled = !_isFilled;
+    notifyListeners();
+  }
+
+  void changeRotation() {
+    var nextIndex = _rotationIndex + 1;
+    if (nextIndex == Rotation.values.length) {
+      nextIndex = 0;
+    }
+    _rotationIndex = nextIndex;
     notifyListeners();
   }
 }
