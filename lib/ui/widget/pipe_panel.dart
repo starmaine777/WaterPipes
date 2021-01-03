@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// 水道管ゲームを構成するパネル。
 /// 正位置から上下左右につなげられるパイプの有無を所持
@@ -8,9 +9,6 @@ class PipePanel extends StatelessWidget {
   final bool isRightOpen;
   final bool isBottomOpen;
 
-  final ValueNotifier<bool> isFillNotifier = ValueNotifier(false);
-  final ValueNotifier<Rotation> rotation = ValueNotifier(Rotation.NONE);
-
   PipePanel(
       {@required this.isLeftOpen,
       @required this.isTopOpen,
@@ -19,11 +17,10 @@ class PipePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: isFillNotifier,
-      builder: (context, isFilled, _) {
+    return Consumer<PipePanelModel>(
+      builder: (context, model, child) {
         Color pipeColor =
-            isFilled ? Colors.blue.shade500 : Colors.grey.shade500;
+            model._isFilled ? Colors.blue.shade500 : Colors.grey.shade500;
         return Container(
           width: 50,
           height: 50,
@@ -47,15 +44,15 @@ class PipePanel extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Container(
                     width: 30,
-                        height: 10,
-                        color: pipeColor,
-                      ),
-                    ),
+                    height: 10,
+                    color: pipeColor,
                   ),
-                  Opacity(
-                    opacity: isRightOpen ? 1.0 : 0.0,
-                    child: Align(
-                      alignment: Alignment.centerRight,
+                ),
+              ),
+              Opacity(
+                opacity: isRightOpen ? 1.0 : 0.0,
+                child: Align(
+                  alignment: Alignment.centerRight,
                   child: Container(
                     width: 30,
                     height: 10,
@@ -80,15 +77,15 @@ class PipePanel extends StatelessWidget {
       },
     );
   }
+}
+
+class PipePanelModel extends ChangeNotifier {
+  bool _isFilled = false;
 
   void changeFill() {
-    isFillNotifier.value = !isFillNotifier.value;
+    _isFilled = !_isFilled;
+    notifyListeners();
   }
-
-  void setFill(bool isFilled) {
-    isFillNotifier.value = isFilled;
-  }
-
 }
 
 enum Rotation { NONE, ROTATION_90, ROTATION_180, ROTATION_270 }

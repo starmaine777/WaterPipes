@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:water_pipes/ui/widget/pipe_panel.dart';
 
 void main() {
@@ -140,11 +141,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget createPanel(
       {bool isLeftOpen, bool isTopOpen, bool isBottomOpen, bool isRightOpen}) {
-    final panel = PipePanel(
-        isLeftOpen: isLeftOpen,
-        isTopOpen: isTopOpen,
-        isBottomOpen: isBottomOpen,
-        isRightOpen: isRightOpen);
-    return GestureDetector(onTap: () => {panel.changeFill()}, child: panel);
+    return ChangeNotifierProvider(
+      create: (_) => PipePanelModel(),
+      child : Consumer<PipePanelModel>(
+        builder: (_, model, child) => GestureDetector(
+          onTap: () {
+            model.changeFill();
+          },
+          child: PipePanel(
+              isLeftOpen: isLeftOpen,
+              isTopOpen: isTopOpen,
+              isBottomOpen: isBottomOpen,
+              isRightOpen: isRightOpen),
+        )
+      )
+    );
   }
 }
