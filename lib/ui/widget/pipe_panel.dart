@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// 水道管ゲームを構成するパネル。
 /// 正位置から上下左右につなげられるパイプの有無を所持
-class PipePanel extends StatefulWidget {
+class PipePanel extends StatelessWidget {
   final bool isLeftOpen;
   final bool isTopOpen;
   final bool isRightOpen;
@@ -18,25 +18,15 @@ class PipePanel extends StatefulWidget {
       @required this.isRightOpen});
 
   @override
-  State<PipePanel> createState() => _PipePanelState();
-
-  void setFill(bool isFilled) {
-    isFillChanger.value = isFilled;
-  }
-}
-
-class _PipePanelState extends State<PipePanel> {
-
-  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: widget.isFillChanger,
+      valueListenable: isFillChanger,
       builder: (context, isFilled, _) {
         Color pipeColor =
             isFilled ? Colors.blue.shade500 : Colors.grey.shade500;
         return GestureDetector(
             onTap: () {
-              widget.isFillChanger.value = !widget.isFillChanger.value;
+              isFillChanger.value = !isFillChanger.value;
             },
             child: Container(
               width: 50,
@@ -45,7 +35,7 @@ class _PipePanelState extends State<PipePanel> {
               child: Stack(
                 children: [
                   Opacity(
-                    opacity: widget.isTopOpen ? 1.0 : 0.0,
+                    opacity: isTopOpen ? 1.0 : 0.0,
                     child: Align(
                       alignment: Alignment.topCenter,
                       child: Container(
@@ -56,7 +46,7 @@ class _PipePanelState extends State<PipePanel> {
                     ),
                   ),
                   Opacity(
-                    opacity: widget.isLeftOpen ? 1.0 : 0.0,
+                    opacity: isLeftOpen ? 1.0 : 0.0,
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Container(
@@ -67,7 +57,7 @@ class _PipePanelState extends State<PipePanel> {
                     ),
                   ),
                   Opacity(
-                    opacity: widget.isRightOpen ? 1.0 : 0.0,
+                    opacity: isRightOpen ? 1.0 : 0.0,
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Container(
@@ -78,7 +68,7 @@ class _PipePanelState extends State<PipePanel> {
                     ),
                   ),
                   Opacity(
-                    opacity: widget.isBottomOpen ? 1.0 : 0.0,
+                    opacity: isBottomOpen ? 1.0 : 0.0,
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
@@ -94,6 +84,11 @@ class _PipePanelState extends State<PipePanel> {
       },
     );
   }
+
+  void setFill(bool isFilled) {
+    isFillChanger.value = isFilled;
+  }
+
 }
 
 enum Rotation { NONE, ROTATION_90, ROTATION_180, ROTATION_270 }
