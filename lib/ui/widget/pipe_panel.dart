@@ -4,16 +4,6 @@ import 'package:provider/provider.dart';
 /// 水道管ゲームを構成するパネル。
 /// 正位置から上下左右につなげられるパイプの有無を所持
 class PipePanel extends StatelessWidget {
-  final bool isLeftOpen;
-  final bool isTopOpen;
-  final bool isRightOpen;
-  final bool isBottomOpen;
-
-  PipePanel(
-      {@required this.isLeftOpen,
-      @required this.isTopOpen,
-      @required this.isBottomOpen,
-      @required this.isRightOpen});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +20,7 @@ class PipePanel extends StatelessWidget {
               child: Stack(
                 children: [
                   Opacity(
-                    opacity: isTopOpen ? 1.0 : 0.0,
+                    opacity: model.isTopOpen ? 1.0 : 0.0,
                     child: Align(
                       alignment: Alignment.topCenter,
                       child: Container(
@@ -41,7 +31,7 @@ class PipePanel extends StatelessWidget {
                 ),
               ),
               Opacity(
-                opacity: isLeftOpen ? 1.0 : 0.0,
+                opacity: model.isLeftOpen ? 1.0 : 0.0,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
@@ -52,7 +42,7 @@ class PipePanel extends StatelessWidget {
                 ),
               ),
               Opacity(
-                opacity: isRightOpen ? 1.0 : 0.0,
+                opacity: model.isRightOpen ? 1.0 : 0.0,
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Container(
@@ -63,7 +53,7 @@ class PipePanel extends StatelessWidget {
                 ),
               ),
               Opacity(
-                opacity: isBottomOpen ? 1.0 : 0.0,
+                opacity: model.isBottomOpen ? 1.0 : 0.0,
                 child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
@@ -82,6 +72,16 @@ class PipePanel extends StatelessWidget {
 }
 
 class PipePanelModel extends ChangeNotifier {
+  bool isLeftOpen = false;
+  bool isTopOpen = false;
+  bool isRightOpen = false;
+  bool isBottomOpen = false;
+
+  PipePanelModel({@required this.isLeftOpen,
+    @required this.isTopOpen,
+    @required this.isBottomOpen,
+    @required this.isRightOpen});
+
   bool _isFilled = false;
 
   int _rotationIndex = 0;
