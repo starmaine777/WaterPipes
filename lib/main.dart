@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_pipes/ui/widget/pipe_panel.dart';
 
+import 'models/pipe_panel_model.dart';
+
 void main() {
   runApp(MyApp());
 }
