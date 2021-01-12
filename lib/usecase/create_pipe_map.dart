@@ -15,16 +15,18 @@ class CreateMapUseCase {
     return resultMap;
   }
 
-  PipePanelModel createPipePanel(int row, int column, List<List<PipePanelModel>> map) {
-    var random = Random();
+  PipePanelModel createPipePanel(
+      int row, int column, List<List<PipePanelModel>> map, Random random) {
     bool isTopOpen = false;
     if (row != 0) {
       var topPanel = map[row - 1][column];
-      // if (topPanel != null && topPanel) {
-      //
-      // } else {
-      //   isTopOpen = random.nextBool();
-      // }
+      if (topPanel != null && topPanel.isBottomOpen) {
+        isTopOpen = true;
+      } else {
+        isTopOpen = random.nextBool();
+      }
     }
+
+
   }
 }
