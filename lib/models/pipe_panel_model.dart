@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 
 // PipePanelクラスで使われるModelクラス
 class PipePanelModel extends ChangeNotifier {
+  final int rowIndex;
+  final int columnIndex;
+
   PipePanelModel(
-      {@required this.isLeftOpen,
-      @required this.isTopOpen,
-      @required this.isBottomOpen,
-      @required this.isRightOpen});
+      {@required this.rowIndex,
+      @required this.columnIndex,
+      this.isLeftOpen,
+      this.isTopOpen,
+      this.isBottomOpen,
+      this.isRightOpen});
 
   bool isLeftOpen = false;
   bool isTopOpen = false;

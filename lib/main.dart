@@ -144,19 +144,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget createPanel(
       {bool isLeftOpen, bool isTopOpen, bool isBottomOpen, bool isRightOpen}) {
     return ChangeNotifierProvider(
-      create: (_) => PipePanelModel(
-          isLeftOpen: isLeftOpen,
-          isTopOpen: isTopOpen,
-          isBottomOpen: isBottomOpen,
-          isRightOpen: isRightOpen),
-      child : Consumer<PipePanelModel>(
-        builder: (_, model, child) => GestureDetector(
-          onTap: () {
-            model.changeRotation();
-          },
-          child: PipePanel(),
-        )
-      )
-    );
+        create: (_) => PipePanelModel(
+            rowIndex: 0,
+            columnIndex: 0,
+            isLeftOpen: isLeftOpen,
+            isTopOpen: isTopOpen,
+            isBottomOpen: isBottomOpen,
+            isRightOpen: isRightOpen),
+        child: Consumer<PipePanelModel>(
+            builder: (_, model, child) => GestureDetector(
+                  onTap: () {
+                    model.changeRotation();
+                  },
+                  child: PipePanel(),
+                )));
   }
 }
