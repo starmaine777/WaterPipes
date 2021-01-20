@@ -6,13 +6,7 @@ class PipePanelModel extends ChangeNotifier {
   final int rowIndex;
   final int columnIndex;
 
-  PipePanelModel(
-      {@required this.rowIndex,
-      @required this.columnIndex,
-      this.isLeftOpen,
-      this.isTopOpen,
-      this.isBottomOpen,
-      this.isRightOpen});
+  PipePanelModel({@required this.rowIndex, @required this.columnIndex});
 
   bool isLeftOpen = false;
   bool isTopOpen = false;
